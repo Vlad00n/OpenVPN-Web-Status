@@ -1,5 +1,5 @@
 <?php
-//	modified by PROXIMO https://gist.github.com/PROX1MO
+//	modified by PROXIMO https://github.com/PROX1MO/OpenVPN-Web-Status
 ###############################################################
 # Page Password Protect 2.13
 ###############################################################
