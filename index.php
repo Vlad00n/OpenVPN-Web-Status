@@ -230,7 +230,7 @@ $clines[$routedata[2]]));
         $inrouting = true;
     }
 }
-$headers = array('VPN Address', 'Pforile', 'Real Address', 'Last Active', 'Sent', 'Received', 'Uptime');
+$headers = array('VPN Address', 'Profile', 'Real Address', 'Last Active', 'Sent', 'Received', 'Uptime');
 //$tdalign = array('left', 'center', 'center', 'center', 'center', 'center', 'center');
 /* DEBUG
 print "<pre>";
