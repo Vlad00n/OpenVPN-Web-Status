@@ -194,7 +194,8 @@ $vpn_port = 5555;
 
 $fp = fsockopen($vpn_host, $vpn_port, $errno, $errstr, 30);
 if (!$fp) {
-    echo "$errstr ($errno)<br>\n";
+    echo "$errstr ($errno)<br><br>";
+    echo "OpenVPN server is down or management not enabled.<br>Check /etc/openvpn/server.conf > management localhost 5555";
     exit;
 }
 
@@ -311,6 +312,7 @@ td {
 	font-family: Verdana, Arial;
     text-align: center;
     background: url("data:image/png;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHLuAAAAAAABd+0DAG7pCwAAAABZKACZXCoA/l0sAP9cKwD/WCgAYgAAAAAIeeELAXXpAgAAAAAAbOkAAHHrAAAAAAAAcdUHAHP3dwBw8LEAAAAAWCgAZ10rAPheLAD/XCsA9lkpAEMAAAAAAHLyqwBy9GYAULEDAAAAAAAAAAAAbrwDAHH1iwBz/P8AcvvmAAAAAFgmADVdKwDyXiwA/1wrANhXJwAmAAAAAABy+f0Ac/z5AG/xZQBm8gAAAAAAAHDyTwBy+/gAdP78AHP97wBw6i7/AAAAWyoA7F4rAP9cKgC/egAACABv6DAAc/3/AHT+/QBz+/kBcOEiAHHuCgBy970AdP7/AHT+/ABy/PEAcvJNAAAAAFopAMldKwD/WioAoQAAAAAAbu1dAHP8/wB0/vwAc/7/AG/ypAFy7CIAcvv/AHT+/ABz/v4AcPOrAAAAAFUmAB1aKQDFXSsA/1opAK5VJgAPAAAAAABx9b8AdP7/AHT+/ABy+/kAcfFYAHP+/wB0/vsAc/3/AG/fJXgGAAlaKQCyXSsA/14rAP9dKwD/WikAjJ4AAAIBcOk5AHP9/wB0/vsAc/38AHT5cwBz/v8AdP78AHP8/wAAAABYJwAzXCsA5V4sAP9eLAD+XiwA/1sqANdZKAAOAHH1EwBy+f8AdP78AHP9/ABx8GwAdP3/AHT+/ABy+/8Ab44EWiUAIlwrANVeLAD/XiwA/14sAP9bKgC/WyUACgFv6B0Acvv/AHT+/AB0/fwAcOo8AHP8/wB0/vsAdP3/AHDtYwAAAABZKQBvXCsA41wrAPxbKgDdVykBRwAAAAAAcfBzAHP+/wB0/vsAc/z9AHHsEgBz+uoAdP7+AHT+/ABy+t4Ac+MjAAAAAFkpADFZKQBKWCYAJwAAAAAAcukyAHL77wB0/v0Ac/7+AHL52QJu1gMAcvSCAHP9/wB0/vsAc/38AHL42ABt5kYAAAAAAAAAAAAAAAAAbu1fAHL76QBz/v0AdP77AHP9/wBx7lgAAAAAAG3mIQBy+M8Ac/39AHT++wB0/v0Ac/z/AHL36gBy+tEAc/rwAHP9/wB0/vwAdP78AHP9/wBy97gBe+4IAF7/AAAAAAAAdPA9AHL51ABz/f8AdP79AHT++wB0/v4AdP7/AHT+/QB0/vsAdP79AHP9/wBz+MMAcO4hAAAAABeLtwAATv8AAAAAAAFy7SYAcvaSAHL6+QBz/v8AdP7/AHP+/wB0/v8Ac/7/AHL68gBy9YMDdO4aAAAAAAAA/wAAAAAACYrgAABA/wAAAAAAAHLmBQJ48BwAcPBgAHDzlgB0+qYAcvWTAHHvUwF18RUAb+MEAAAAAABb/wAEf+kA/D8AAPY3AADGMwAAxjEAAIYwAACGMAAAjBgAAIwYAACMGAAAjjgAAIfwAACD4QAAwAEAAOADAADwBwAA/j8AAA%3D%3D") no-repeat;
+	margin-left: -10px;
 }
 .footer {
 	font-size: 10px;
@@ -359,7 +361,6 @@ if ($return == 0) {
 foreach ($clients as $client) { 
     $client[3] = date ('d/m/Y H:i', strtotime($client[3]));
     $client[6] = date ('d/m/Y H:i', strtotime($client[6]));
-//	$client[6] = round (abs (date ('d/m/Y H:i') - $client[6]),2);
     $client[4] = number_format($client[4], 0, '', '.')/1 ." MB";
     $client[5] = number_format($client[5], 0, '', '.')/1 ." MB";
     $client[2] = preg_replace('/(.*):.*/', '$1', $client[2]);
