@@ -195,7 +195,7 @@ $vpn_port = 5555;
 $fp = fsockopen($vpn_host, $vpn_port, $errno, $errstr, 30);
 if (!$fp) {
     echo "$errstr ($errno)<br><br>";
-    echo "OpenVPN server is down or management not enabled.<br>Check /etc/openvpn/server.conf > management localhost 5555";
+    echo "OpenVPN server is offline or management not enabled.<br>Check /etc/openvpn/server.conf > management localhost 5555";
     exit;
 }
 
@@ -340,9 +340,9 @@ td {
     <td><?php
 exec("pgrep openvpn", $output, $return);
 if ($return == 0) {
-    echo '<div class="online">'."Running".'</div>';
+    echo '<div class="online" title="Server is online">'."Online".'</div>';
 } else {
-	echo '<div class="offline">'."Stopped".'</div>';
+	echo '<div class="offline" title="Server is offline or management not enabled">'."Offline".'</div>';
 }
 ?></td>
     <td><?php echo count($clients);?></td>
