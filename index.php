@@ -1,5 +1,5 @@
 <?php
-//	modified by PROXIMO https://github.com/PROX1MO/OpenVPN-Web-Status
+//modified by PROXIMO https://github.com/PROX1MO/OpenVPN-Web-Status
 ###############################################################
 # Page Password Protect 2.13
 ###############################################################
@@ -230,7 +230,7 @@ $clines[$routedata[2]]));
         $inrouting = true;
     }
 }
-$headers = array('VPN Address', 'Pforile', 'Real Address', 'Last Active', 'Sent', 'Received', 'Connected Since');
+$headers = array('VPN Address', 'Pforile', 'Real Address', 'Last Active', 'Sent', 'Received', 'Uptime');
 //$tdalign = array('left', 'center', 'center', 'center', 'center', 'center', 'center');
 /* DEBUG
 print "<pre>";
@@ -359,13 +359,13 @@ if ($return == 0) {
 </tr>
 <?php 
 function formatBytes($B, $D=2){
-    $S = 'kMGTPEZY';
+    $S = 'kMGTP';
     $F = floor((strlen($B) - 1) / 3);
     return sprintf("%.{$D}f", $B/pow(1024, $F)).' '.@$S[$F-1].'B';
 }
 foreach ($clients as $client) { 
-    $client[3] = date ('d/m/Y H:i', strtotime($client[3]));
-    $client[6] = date ('d/m/Y H:i', strtotime($client[6]));
+    $client[3] = date ('d/m/y H:i', strtotime($client[3]));
+    $client[6] = gmdate ("H:i:s", strtotime("now") - strtotime($client[6]));
     $client[4] = formatBytes ($client[4]);
     $client[5] = formatBytes ($client[5]);
     $client[2] = preg_replace('/(.*):.*/', '$1', $client[2]);
