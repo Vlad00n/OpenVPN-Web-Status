@@ -48,7 +48,7 @@ $LOGIN_INFORMATION = array(
 
 // Add login/password pairs below, like described above
 // NOTE: all rows except last must have comma "," at the end of line
-// to use md5 pass > line 132 $pass = md5($_POST['access_password']);
+// to use md5 pass > line 142 $pass = md5($_POST['access_password']);
 $LOGIN_INFORMATION = array(
   'admin' => 'admin',
 );
@@ -285,8 +285,8 @@ td {
     <td>0</td>
     <td>0.0.0.0</td>
     <td>0.0.0.0</td>
-	<td>(0.0 KiB)</td>
-	<td>(0.0 KiB)</td>
+	<td>0.00 kB</td>
+	<td>0.00 kB</td>
 	<td>00:00:00s</td>
   </tr>
 <tr>
@@ -307,7 +307,7 @@ document.getElementById('datetime').innerHTML = (('0'+dt.getDate()).slice(-2)) +
 </script></b></p>
 <div class='footer'>________________________________________
 <br>
-<a style='font-size: 10px; color: #B0B0B0; font-family: Verdana, Arial;' href='./index.php?logout=1'>Logout</a>
+<a style='font-size: 10px; color: #B0B0B0; font-family: Verdana, Arial;' href='./?logout=1'>Logout</a>
 </div>
 </body>
 </html>";
@@ -355,6 +355,11 @@ print_r($routedata);
 print "</pre>";
 */
 fclose($fp);
+function formatBytes($B, $D=2){
+    $S = 'kMGTP';
+    $F = floor((strlen($B) - 1) / 3);
+    return sprintf("%.{$D}f", $B/pow(1024, $F)).' '.@$S[$F-1].'B';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -464,8 +469,8 @@ if ($return == 0) {
     <td><?php echo count($clients);?></td>
     <td><?php $ip1 = exec("ifconfig tun0 | grep 'inet addr'| cut -d: -f2 | cut -d' ' -f1");echo $ip1;?></td>
     <td><?php $ip2 = exec("ifconfig eth0 | grep 'inet addr'| cut -d: -f2 | cut -d' ' -f1");echo $ip2;?></td>
-	<td><?php $rx = exec("ifconfig tun0 | grep 'RX bytes'| cut -d: -f2 | cut -d' ' -f2,3");echo $rx;?></td>
-	<td><?php $tx = exec("ifconfig tun0 | grep 'TX bytes'| cut -d: -f3 | cut -d' ' -f2,3");echo $tx;?></td>
+	<td><?php $rx = exec("ifconfig tun0 | grep 'RX bytes'| cut -d: -f2 | cut -d' ' -f1");echo formatBytes ($rx);?></td>
+	<td><?php $tx = exec("ifconfig tun0 | grep 'TX bytes'| cut -d: -f3 | cut -d' ' -f1");echo formatBytes ($tx);?></td>
 	<td><?php $up = exec("ps -o etime -p $(pidof openvpn)");echo $up;?>s</td>
   </tr>
 <tr>
@@ -474,11 +479,6 @@ if ($return == 0) {
 <?php } ?>
 </tr>
 <?php 
-function formatBytes($B, $D=2){
-    $S = 'kMGTP';
-    $F = floor((strlen($B) - 1) / 3);
-    return sprintf("%.{$D}f", $B/pow(1024, $F)).' '.@$S[$F-1].'B';
-}
 foreach ($clients as $client) { 
     $client[3] = (gmdate ("i:s", strtotime("now") - strtotime($client[3])))."s";
 //    $client[3] = date ('d/m/y H:i', strtotime($client[3]));
@@ -490,7 +490,7 @@ foreach ($clients as $client) {
 ?>
 <tr>
 <?php foreach ($client as $td) { ?>
-<td align='<?php echo $tdalign[$i++] ?>'><?php echo $td?></td>
+<td align="<?php echo $tdalign[$i++] ?>"><?php echo $td?></td>
 <?php } ?>
 </tr>
 <?php } ?>
@@ -506,7 +506,7 @@ $ip = getenv("REMOTE_ADDR");
 	echo "Your IP: " . $ip;
 ?>
 <br>
-<a style="font-size: 10px; color: #B0B0B0; font-family: Verdana, Arial;" href="./index.php?logout=1">Logout</a>
+<a style="font-size: 10px; color: #B0B0B0; font-family: Verdana, Arial;" href="./?logout=1">Logout</a>
 </div>
 </body>
 </html>
