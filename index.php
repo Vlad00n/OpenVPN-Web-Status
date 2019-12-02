@@ -345,7 +345,7 @@ $clines[$routedata[2]]));
     }
 }
 $headers = array('VPN Address', 'Profile', 'Real Address', 'Last Active', 'Sent', 'Received', 'Uptime');
-//$tdalign = array('left', 'center', 'center', 'center', 'center', 'center', 'center');
+$tdalign = array('center', 'center', 'center', 'center', 'center', 'center', 'center');
 /* DEBUG
 print "<pre>";
 print_r($headers);
