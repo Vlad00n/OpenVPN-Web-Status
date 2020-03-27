@@ -502,7 +502,7 @@ foreach ($clients as $client) {
 <br>
 <?php
 //Gets the IP address
-$ip = getenv("REMOTE_ADDR");
+$ip = $_SERVER['REMOTE_ADDR'];
 	echo "Your IP: " . $ip;
 ?>
 <br>
