@@ -1,6 +1,6 @@
 # OpenVPN-Web-Status
 
-A PHP based OpenVPN web status to monitor active OpenVPN connection.
+A PHP based OpenVPN web status to monitor active OpenVPN connection, works with php 7 or newer.
 <br>
 <img src="https://user-images.githubusercontent.com/17911448/69898634-aab70580-1364-11ea-81f7-9bbd3dd26582.png" title="Login screen">
 <br>
